@@ -18,5 +18,5 @@ function FoundationPress_theme_support() {
 
 }
 
-add_action('after_setup_theme', 'FoundationPress_theme_support'); 
+add_action('after_setup_theme', 'FoundationPress_theme_support');
 ?>

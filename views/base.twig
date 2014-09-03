@@ -1,0 +1,38 @@
+{% block html_head_container %}
+    {% include 'html-header.twig' %}
+        {% block head %}
+        {% endblock %}
+{% endblock %}
+    <body class="{{body_class}}" data-template="base.twig">
+        {{action('foundationPress_after_body')}}
+
+        {% include 'off-canvas-menu.twig' %}
+        <div class="fixed">
+            {% include 'top-bar.twig' %}
+        </div>
+
+        <section id="content" role="document" class="container main-content-wrapper">
+        {% block splash %}
+        <div id="splash" class="splash"></div>
+        {% endblock %}
+
+            <div class="row">
+                <div class="large-12 columns">
+                    {% if title %}<h1 class="text-center">{{title}}</h1>{% endif %}
+                    <div class="wrapper {{sidebar_class}}">
+                        {% block content %}
+                            Sorry, no content
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% block footer %}
+            <footer id="footer">
+                {% include 'footer.twig' %}
+            </footer>
+            {{ function('wp_footer') }}
+        {% endblock %}
+    </body>
+</html>

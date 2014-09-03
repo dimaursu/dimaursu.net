@@ -1,32 +1,27 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying all pages.
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site will use a
+ * different template.
+ *
+ * To generate specific templates for your pages you can use:
+ * /mytheme/views/page-mypage.twig
+ * (which will still route through this PHP file)
+ * OR
+ * /mytheme/page-mypage.php
+ * (in which case you'll want to duplicate this file and save to the above path)
+ *
+ * Methods for TimberHelper can be found in the /functions sub-directory
+ *
+ * @package  WordPress
+ * @subpackage  Timber
+ * @since    Timber 0.1
+ */
 
-<div class="row">
-	<div class="small-12 large-8 columns" role="main">
-
-	<?php do_action('foundationPress_before_content'); ?>
-
-	<?php while (have_posts()) : the_post(); ?>
-		<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
-			<header>
-				<h1 class="entry-title"><?php the_title(); ?></h1>
-			</header>
-			<?php do_action('foundationPress_page_before_entry_content'); ?>
-			<div class="entry-content">
-				<?php the_content(); ?>
-			</div>
-			<footer>
-				<?php wp_link_pages(array('before' => '<nav id="page-nav"><p>' . __('Pages:', 'FoundationPress'), 'after' => '</p></nav>' )); ?>
-				<p><?php the_tags(); ?></p>
-			</footer>
-			<?php do_action('foundationPress_page_before_comments'); ?>
-			<?php comments_template(); ?>
-			<?php do_action('foundationPress_page_after_comments'); ?>
-		</article>
-	<?php endwhile;?>
-
-	<?php do_action('foundationPress_after_content'); ?>
-
-	</div>
-	<?php get_sidebar(); ?>
-</div>
-<?php get_footer(); ?>
+$context = Timber::get_context();
+$post = new TimberPost();
+$context['post'] = $post;
+Timber::render(array('page-' . $post->post_name . '.twig', 'page.twig'), $context);

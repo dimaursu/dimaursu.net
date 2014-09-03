@@ -1,15 +1,13 @@
-</section>
-<footer class="row">
-	<?php do_action('foundationPress_before_footer'); ?>
-	<?php dynamic_sidebar("footer-widgets"); ?>
-	<?php do_action('foundationPress_after_footer'); ?>
-</footer>
-<a class="exit-off-canvas"></a>
-
-	<?php do_action('foundationPress_layout_end'); ?>
-	</div>
-</div>
-<?php wp_footer(); ?>
-<?php do_action('foundationPress_before_closing_body'); ?>
-</body>
-</html>
+<?php
+/*
+ * Third party plugins that hijack the theme will call wp_footer() to get the footer template.
+ * We use this to end our output buffer (started in header.php) and render into the view/page-plugin.twig template.
+ */
+$timberContext = $GLOBALS['timberContext'];
+if (!isset($timberContext)) {
+    throw new \Exception('Timber context not set in footer.');
+}
+$timberContext['content'] = ob_get_contents();
+ob_end_clean();
+$templates = array('page-plugin.twig');
+Timber::render($templates, $timberContext);

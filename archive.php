@@ -1,29 +1,40 @@
-<?php get_header(); ?>
-<div class="row">
-<!-- Row for main content area -->
-	<div class="small-12 large-8 columns" role="main">
+<?php
+/**
+ * The template for displaying Archive pages.
+ *
+ * Used to display archive-type pages if nothing more specific matches a query.
+ * For example, puts together date-based pages if no date.php file exists.
+ *
+ * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ *
+ * Methods for TimberHelper can be found in the /functions sub-directory
+ *
+ * @package 	WordPress
+ * @subpackage 	Timber
+ * @since 		Timber 0.2
+ */
 
-	<?php if ( have_posts() ) : ?>
+$templates = array('archive.twig', 'index.twig');
 
-		<?php /* Start the Loop */ ?>
-		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'content', get_post_format() ); ?>
-		<?php endwhile; ?>
+$data = Timber::get_context();
 
-		<?php else : ?>
-			<?php get_template_part( 'content', 'none' ); ?>
+$data['title'] = 'Archive';
+if (is_day()){
+    $data['title'] = 'Archive: '.get_the_date( 'D M Y' );
+} else if (is_month()){
+    $data['title'] = 'Archive: '.get_the_date( 'M Y' );
+} else if (is_year()){
+    $data['title'] = 'Archive: '.get_the_date( 'Y' );
+} else if (is_tag()){
+    $data['title'] = single_tag_title('', false);
+} else if (is_category()){
+    $data['title'] = single_cat_title('', false);
+    array_unshift($templates, 'archive-'.get_query_var('cat').'.twig');
+} else if (is_post_type_archive()){
+    $data['title'] = post_type_archive_title('', false);
+    array_unshift($templates, 'archive-'.get_post_type().'.twig');
+}
 
-	<?php endif; // end have_posts() check ?>
+$data['posts'] = Timber::get_posts();
 
-	<?php /* Display navigation to next/previous pages when applicable */ ?>
-	<?php if ( function_exists('FoundationPress_pagination') ) { FoundationPress_pagination(); } else if ( is_paged() ) { ?>
-		<nav id="post-nav">
-			<div class="post-previous"><?php next_posts_link( __( '&larr; Older posts', 'FoundationPress' ) ); ?></div>
-			<div class="post-next"><?php previous_posts_link( __( 'Newer posts &rarr;', 'FoundationPress' ) ); ?></div>
-		</nav>
-	<?php } ?>
-
-	</div>
-	<?php get_sidebar(); ?>
-</div>
-<?php get_footer(); ?>
+Timber::render($templates, $data);

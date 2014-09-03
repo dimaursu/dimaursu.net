@@ -1,0 +1,28 @@
+{% extends "base.twig" %}
+
+{% block splash%}
+<div class="header-splash splash">
+    <div class="welcome row">
+        <div class="large-7 medium-10 large-centered medium-centered small-centered columns">
+            <div class="large-4 medium-4 small-12 columns">
+                <img class=portrait src="{{ site.theme.link }}/assets/img/foto.jpg" alt="My portrait">
+            </div>
+            <div class="large-8 medium-8 small-12 columns visibility-stroke">
+                <p>Hi there! I'm</p>
+                <p class="name">Dumitru Ursu</p>
+                <p style="display: inline-block">, a</p>
+                <p>web developer, wannabe web designer and cyclist</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <h2>Here are some of my recent projects:</h2>
+    <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+        {% for post in posts %}
+            {% include 'portofolio-grid.twig' %}
+        {% endfor %}
+    </ul>
+{% endblock %}

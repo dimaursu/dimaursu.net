@@ -1,0 +1,7 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    {% for post in posts %}
+        {% include 'tease-post.twig' %}
+    {% endfor %}
+{% endblock %}

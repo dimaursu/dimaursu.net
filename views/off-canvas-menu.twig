@@ -1,0 +1,19 @@
+<div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+        {{action('foundationPress_layout_start')}}
+        <nav class="tab-bar show-for-small-only">
+            <section class="left-small">
+                <a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+            </section>
+            <section class="middle tab-bar-section">
+                <a href={{site.link}}>
+                    <h1 class="title">{{bloginfo( 'name' )}}</h1>
+                </a>
+            </section>
+        </nav>
+        <aside class="left-off-canvas-menu">
+            {{ function('foundationPress_mobile_off_canvas') }}
+        </aside>
+    </div>
+</div>
+

@@ -2,3 +2,21 @@
  * Custom variables
  * ----------------------------------------------------------------------------
  */
+
+@function grayscale($value) {
+  @return #{ "grayscale(" + $value + ")" };
+}
+
+@mixin filter( $var ) {
+    -webkit-filter: $var;
+    -moz-filter: $var;
+    -ms-filter: $var;
+    -o-filter: $var;
+    filter: $var;
+    filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+    filter: gray;
+}
+
+
+$fi-path: "../bower_components/foundation-icon-fonts";
+@import '../../bower_components/foundation-icon-fonts/_foundation-icons.scss';

@@ -24,13 +24,13 @@ function start_cleanup() {
 
     // clean up gallery output in wp
     add_filter('gallery_style', 'gallery_style');
-    
+
     // additional post related cleaning
     add_filter('get_image_tag_class', 'image_tag_class', 0, 4);
     add_filter('get_image_tag', 'image_editor', 0, 4);
     add_filter( 'the_content', 'img_unautop', 30 );
 
-} 
+}
 
 /**
  * Clean up head
@@ -47,7 +47,7 @@ function cleanup_head() {
 
     // Post and comment feed links
     remove_action( 'wp_head', 'feed_links', 2 );
-    
+
     // Windows Live Writer
     remove_action( 'wp_head', 'wlwmanifest_link' );
 
@@ -81,7 +81,7 @@ function cleanup_head() {
     // Prevent unneccecary info from being displayed
     add_filter('login_errors',create_function('$a', "return null;"));
 
-} 
+}
 
 
 // remove WP version from RSS
@@ -96,22 +96,22 @@ function remove_wp_ver_css_js( $src ) {
 
 // remove injected CSS for recent comments widget
 function remove_wp_widget_recent_comments_style() {
-   if ( has_filter('wp_head', 'wp_widget_recent_comments_style') ) {
-      remove_filter('wp_head', 'wp_widget_recent_comments_style' );
-   }
+    if ( has_filter('wp_head', 'wp_widget_recent_comments_style') ) {
+        remove_filter('wp_head', 'wp_widget_recent_comments_style' );
+    }
 }
 
 // remove injected CSS from recent comments widget
 function remove_recent_comments_style() {
-  global $wp_widget_factory;
-  if (isset($wp_widget_factory->widgets['WP_Widget_Recent_Comments'])) {
-    remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
-  }
+    global $wp_widget_factory;
+    if (isset($wp_widget_factory->widgets['WP_Widget_Recent_Comments'])) {
+        remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
+    }
 }
 
 // remove injected CSS from gallery
 function gallery_style($css) {
-  return preg_replace("!<style type='text/css'>(.*?)</style>!s", '', $css);
+    return preg_replace("!<style type='text/css'>(.*?)</style>!s", '', $css);
 }
 
 /**
@@ -143,7 +143,7 @@ function fixed_img_caption_shortcode($attr, $content = null) {
         return $content;
     if ( $id ) $id = 'id="' . esc_attr($id) . '" ';
     return '<figure>'
-    . do_shortcode( $content ) . '<figcaption>' . $caption . '</figcaption></figure>';
+        . do_shortcode( $content ) . '<figcaption>' . $caption . '</figcaption></figure>';
 }
 
 
@@ -151,28 +151,28 @@ function fixed_img_caption_shortcode($attr, $content = null) {
 function image_tag_class($class, $id, $align, $size) {
     $align = 'align' . esc_attr($align);
     return $align;
-} 
+}
 
 // Remove width and height in editor, for a better responsive world.
 function image_editor($html, $id, $alt, $title) {
     return preg_replace(array(
-            '/\s+width="\d+"/i',
-            '/\s+height="\d+"/i',
-            '/alt=""/i'
-        ),
-        array(
-            '',
-            '',
-            '',
-            'alt="' . $title . '"'
-        ),
-        $html);
-} 
+        '/\s+width="\d+"/i',
+        '/\s+height="\d+"/i',
+        '/alt=""/i'
+    ),
+    array(
+        '',
+        '',
+        '',
+        'alt="' . $title . '"'
+    ),
+    $html);
+}
 
-// Wrap images with figure tag 
+// Wrap images with figure tag
 function img_unautop($pee) {
     $pee = preg_replace('/<p>\\s*?(<a .*?><img.*?><\\/a>|<img.*?>)?\\s*<\\/p>/s', '<figure>$1</figure>', $pee);
     return $pee;
-} 
+}
 
 ?>

@@ -9,8 +9,8 @@
  *	4.2 - Posts
  *	4.3	- Widgets
  *	4.4 - Comments
-  *	4.5 - Lists
-  * 4.6 - Forms
+ *	4.5 - Lists
+ * 4.6 - Forms
  * 5.0 - Plugins
 
  * ----------------------------------------------------------------------------
@@ -21,27 +21,46 @@
  * ----------------------------------------------------------------------------
  */
 
-// Reset margin and padding on figure element
-figure { 
-	margin: 0; 
-	padding: 0;
+    // Reset margin and padding on figure element
+figure {
+        margin: 0;
+        padding: 0;
 }
 
 // Add some basic styling for figcaption element
 figcaption {
-	margin-bottom: rem-calc(20);
-	margin-top: rem-calc(10); 
-	color: #6f6f6f; 
+    margin-bottom: rem-calc(20);
+    margin-top: rem-calc(10);
+    color: #6f6f6f;
 }
 
 // Add some whitespace between top bar and content
-.top-bar-container, .tab-bar {
-	margin-bottom: rem-calc(32);
+
+// Fix the issue where the WP adminbar overlaps the fixed navbar
+
+body.logged-in .fixed {
+    padding-top: 28px !important;
 }
 
-// Fix the issue where the WP adminbar overlaps the mobile menu
-#wpadminbar {
-	position: fixed !important;
+@media screen and (max-width: 40em) {
+
+    #wpadminbar {
+        position: fixed !important;
+    }
+
+    .main-content-wrapper {
+        padding-top: 2.8125rem;
+    }
+
+    .move-right.off-canvas-wrap, .inner-wrap {
+        height:100%;
+    }
+}
+
+// fix the off-canvas-menu scrolling box
+.off-canvas-wrap {
+    position: absolute;
+    z-index:100;
 }
 
 /**
@@ -49,16 +68,144 @@ figcaption {
  * ----------------------------------------------------------------------------
  */
 
-// Insert styles here
+.article-content {
 
+    p {
+        font-family: "Crimson Text";
+        font-size: 1.2rem;
+    }
+}
 
 /**
  * 3.0 Header, sidebar and footer
  * ----------------------------------------------------------------------------
  */
 
-// Insert styles here
+section.container {
 
+    .wrapper {
+        padding-top: rem-calc(32);
+    }
+}
+
+li.active {
+    border-bottom: solid $primary-color;
+}
+
+li.name {
+
+    img {
+        height: $topbar-height - 2px;
+        position: relative;
+        top: -4px;
+    }
+}
+
+.visibility-stroke {
+    text-shadow:
+     1px  1px 2px #fff,
+    -1px -1px 2px #fff,
+     1px -1px 2px #fff,
+    -1px  1px 2px #fff,
+     1px  1px 2px #fff,
+     0px  6px 6px #fff,
+     0px -6px 6px #fff,
+    -6px  0px 6px #fff,
+     6px  0px 6px #fff,
+     6px  0px 6px #fff
+}
+
+#splash {
+    background: url(../assets/img/Moldova-Landscape_by-Leszek-Kozlowski.jpg) no-repeat center center;
+    min-height: rem-calc(220px);
+}
+.header-splash {
+    min-height: rem-calc(420px);
+    background: url(../assets/img/moldova-field_by-mitchie.ru.jpg) no-repeat;
+    text-align: center;
+    .welcome {
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: rem-calc(126px);
+
+        .portrait:hover {
+            @include filter(grayscale(100%));
+            -webkit-transition: all 0.5s ease;
+               -moz-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                    transition: all 0.5s ease;
+        }
+
+        .portrait {
+            border-radius: 60px;
+            @include filter(grayscale(0));
+            filter: none;
+        }
+
+        p {
+            font-family: 'Yanone Kaffeesatz', sans-serif;
+            color: $primary-color;
+            font-size: rem-calc(20);
+            margin: 0;
+        }
+
+        .name {
+            display: inline-block;
+            font-size: 2rem;
+        }
+    }
+}
+
+.splash {
+    background-attachment: scroll; /* fixed? */
+    background-position: top left;
+    width: 100%;
+    background-size: cover;
+}
+
+.portofolio-item {
+    -webkit-transition: opacity 0.5s ease;
+       -moz-transition: opacity 0.5s ease;
+         -o-transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease;
+
+    img {
+        box-shadow: 0px 0px 5px #999;
+    }
+
+    h4 {
+        font-family: "Open Sans", sans-serif;
+        font-size: rem-calc(18);
+        text-align: center;
+    }
+}
+
+.portofolio-item:hover {
+    opacity: 0.8;
+}
+
+p {
+    margin-bottom: rem-calc(8px);
+}
+
+footer#footer {
+    position: relative;
+    bottom: 0px;
+
+    .social {
+        background-color: $green;
+
+        i.large {
+            font-size: 3.2rem;
+            color: #333;
+            padding: 1rem;
+        }
+    }
+
+   .links {
+        background-color: $blue;
+    }
+}
 
 /**
  * 4.0 Content
@@ -66,76 +213,55 @@ figcaption {
  */
 
 
-	/**
-	 * 4.1 Pages
-	 * ------------------------------------
-	 */
+/**
+ * 4.1 Pages
+ * ------------------------------------
+ */
+.post {
+    font-family: 'Fanwood Text', serif;
+}
 
-	 // Hero
+/**
+ * 4.2 Posts
+ * ------------------------------------
+ */
 
-	#homepage-hero {
-		background: url("http://foundation.zurb.com/assets/img/marquee-stars.svg") repeat scroll 0 0 #074E68;
-		padding: rem-calc(20) 0;
-		margin: - rem-calc(32) 0 rem-calc(32);
-		position: relative;
-		text-align: left;
-		height: auto;
-
-			h1 a, h4 { color: #fff; }
-
-			.floatingyeti img {
-				max-width: 30%;
-				position: absolute;
-				right: rem-calc(100);
-			}
-
-			.download { margin-top: rem-calc(20); }
-		}
+// Insert styles here
 
 
-	/**
-	 * 4.2 Posts
-	 * ------------------------------------
-	 */
+/**
+ * 4.3 Widgets
+ * ------------------------------------
+ */
 
-	// Insert styles here
-
-
-	/**
-	 * 4.3 Widgets
-	 * ------------------------------------
-	 */
-
-	// Insert styles here
+// Insert styles here
 
 
-	/**
-	 * 4.4 Comments
-	 * ------------------------------------
-	 */
+/**
+ * 4.4 Comments
+ * ------------------------------------
+ */
 
-	// Insert styles here
-
-
-	/**
-	 * 4.5 Lists
-	 * ------------------------------------
-	 */
-
-	// Insert styles here
+// Insert styles here
 
 
-	/**
-	 * 4.6 Forms
-	 * ------------------------------------
-	 */
+/**
+ * 4.5 Lists
+ * ------------------------------------
+ */
 
-	// Insert styles here
+// Insert styles here
+
+
+/**
+ * 4.6 Forms
+ * ------------------------------------
+ */
+
+// Insert styles here
 
 
 /**
  * 5.0 Plugins
  * ----------------------------------------------------------------------------
  */
-
-// Insert styles here
