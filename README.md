@@ -2,7 +2,9 @@
 
 This is the theme used for my site, [dimaursu.net](http://dimaursu.net). It's a
 heavily modified foundationPress starter theme, and it requires
-[Timber](https://github.com/jarednova/timber) in order to work.
+[Timber](https://github.com/jarednova/timber) in order to work. Beside that, it
+uses turbolinks, the stuff used in Rails to make page loading really fast (it
+basically replaces the content of the webpage, whithout reloading the CSS/JS).
 
 Contributions are welcome!
 
