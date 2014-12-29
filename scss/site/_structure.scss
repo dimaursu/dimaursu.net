@@ -23,8 +23,8 @@
 
     // Reset margin and padding on figure element
 figure {
-        margin: 0;
-        padding: 0;
+        margin: 1rem;
+        padding: 1rem;
 }
 
 // Add some basic styling for figcaption element
@@ -38,7 +38,7 @@ figcaption {
 
 // Fix the issue where the WP adminbar overlaps the fixed navbar
 
-body.logged-in .fixed {
+.logged-in .fixed {
     padding-top: 28px !important;
 }
 
@@ -70,10 +70,18 @@ body.logged-in .fixed {
 
 .article-content {
 
-    p {
-        font-family: "Crimson Text";
+    p, div, li {
+        font-family: $font-serif;
         font-size: 1.2rem;
     }
+
+    a {
+        color: #B80404;
+
+        &:hover, &:focus {
+            color: #ec5959;
+        }
+   }
 }
 
 /**
@@ -178,6 +186,12 @@ li.name {
         font-size: rem-calc(18);
         text-align: center;
     }
+
+    p {
+        color: #8b8b8b;
+        text-align:center;
+        font-size: rem-calc(14);
+    }
 }
 
 .portofolio-item:hover {
@@ -185,12 +199,13 @@ li.name {
 }
 
 p {
-    margin-bottom: rem-calc(8px);
+    margin-bottom: 1.5rem;
 }
 
 footer#footer {
     position: relative;
     bottom: 0px;
+    padding-top: 2rem;
 
     .social {
         background-color: $green;
@@ -211,7 +226,11 @@ footer#footer {
  * 4.0 Content
  * ----------------------------------------------------------------------------
  */
-
+.content-wrapper {
+    a img {
+        border: solid 2px #DDD;
+    }
+}
 
 /**
  * 4.1 Pages
@@ -236,6 +255,9 @@ footer#footer {
 
 // Insert styles here
 
+code {
+    white-space: pre-wrap;
+}
 
 /**
  * 4.4 Comments
