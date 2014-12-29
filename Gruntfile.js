@@ -4,14 +4,14 @@ module.exports = function(grunt) {
 
     sass: {
       options: {
-        includePaths: ['bower_components/foundation/scss']
+        includePaths: ['bower_components/foundation/scss', 'bower_components/slick-carousel/slick/']
       },
       dist: {
         options: {
           outputStyle: 'compressed'
         },
         files: {
-          'css/app.css': 'scss/app.scss'
+          'css/app.css': ['scss/app.scss','slick.scss']
         }
       }
     },
@@ -42,19 +42,15 @@ module.exports = function(grunt) {
     },
 
     concat: {
-      options: {
-        separator: ';'
-      },
-      dist: {
+      js: {
         src: [
           'js/foundation/js/foundation.min.js',
           'js/init-foundation.js',
-          'js/Please.min.js'
+          'js/slick-carousel/slick/slick.min.js',
+          'js/slick-slider.js'
         ],
-
         dest: 'js/app.js'
-      }
-
+        }
     },
 
     watch: {
@@ -74,14 +70,6 @@ module.exports = function(grunt) {
         afterconcat: ['js/app.js']
     },
 
-    csslint: {
-        strict: {
-            options: {
-            import: 2
-            },
-            src: ['css/app.css']
-        },
-    }
   });
 
   grunt.loadNpmTasks('grunt-sass');
@@ -94,4 +82,5 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['sass']);
   grunt.registerTask('default', ['copy', 'uglify', 'concat', 'watch', 'jshint']);
 
-}
+};
+

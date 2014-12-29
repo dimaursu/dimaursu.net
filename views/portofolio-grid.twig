@@ -1,8 +1,9 @@
 {% block content %}
     <li>
         <a class="portofolio-item" href="{{post.link}}">
-            <img src="{{post.thumbnail.src|resize(275)}}" />
             <h4>{{post.title}}</h4>
+            <img src="{{post.thumbnail.src|resize(275)}}" />
+            <p>{{post.date}}</p>
         </a>
     </li>
 {% endblock %}
